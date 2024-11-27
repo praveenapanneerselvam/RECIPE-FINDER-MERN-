@@ -1,0 +1,70 @@
+/* RecipeDetailsModal.css */
+
+.modal-overlay {
+    position: fixed; /* Position the overlay to cover the entire screen */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 1000; /* Ensure modal is above other content */
+  }
+  
+  .modal-content {
+    background-color: white; /* White background for the modal */
+    padding: 2rem; /* Padding around the content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    max-width: 600px; /* Maximum width of the modal */
+    width: 90%; /* Responsive width */
+    position: relative; /* Position relative for absolute children */
+  }
+  
+  button {
+    position: absolute; /* Position close button */
+    top: 1rem; /* Space from top */
+    right: 1rem; /* Space from right */
+    padding: 0.5rem 1rem; /* Padding for button */
+    background-color: #ff6347; /* Red background for close button */
+    color: white; /* White text */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  button:hover {
+    background-color: #ff4500; /* Darker red on hover */
+  }
+  
+  h2 {
+    margin: 0; /* Remove default margin */
+    color: #333; /* Dark color for headings */
+  }
+  
+  img {
+    max-width: 100%; /* Ensure images are responsive */
+    border-radius: 4px; /* Rounded corners for images */
+  }
+  
+  h3 {
+    margin-top: 1.5rem; /* Space above section headings */
+    color: #555; /* Slightly lighter color for subheadings */
+  }
+  
+  ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+  }
+  
+  li {
+    margin: 0.5rem 0; /* Space between list items */
+    background-color: #f9f9f9; /* Light background for list items */
+    padding: 0.5rem; /* Padding for list items */
+    border-radius: 4px; /* Rounded corners for items */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for items */
+  }
+  

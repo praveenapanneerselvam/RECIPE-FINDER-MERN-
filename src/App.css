@@ -1,38 +1,210 @@
-.App {
+/* App.css */
+
+/* General resets */
+* {
+  margin: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: url('./assets/img10.jpg') no-repeat center center fixed; /* Center and fix image in place */
+  background-size: cover; /* Make background cover the entire viewport */
+  padding: 100px; /* Add padding around content */
+  margin: 0; /* Set margin to 0 for a consistent view */
+  background-color: #da2929; /* Fallback color for unsupported background images */
+  color: #333; /* Text color */
+  line-height: 1.6; /* Adjust line height for readability */
+}
+
+/* Link resets */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Navbar styling */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1f0680;
+  padding: 1rem 2rem;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.navbar a {
+  color: white;
+  margin: 0 1rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #ddd;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Main content container with padding to avoid hiding behind navbar */
+.container {
+  width:100%;
+  margin: 5rem auto 2rem auto;
+  padding: 10ppx;
+  background-color: #060a06;
+}
+
+/* Page components */
+.welcome, .signup, .login, .recipe-page, .favorites, .weekly-planner {
+  background-color: #e9dede;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  width:100%;
+}
+
+h1, h2 {
+  color: #2bd57a;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* Button styling */
+button {
+  background-color: #db4040;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #d9815f;
+  transform: scale(1.05);
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input, select, textarea {
+  padding: 0.75rem;
+  border: 1px solid #eae4e4;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Card styling for Favorites and Weekly Planner */
+.card {
+  background-color: #f0e4e4;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.card-content {
+  color: #666;
+}
+.nutrient-tracker-container {
+  max-width: 800px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.form-container {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.form-select, .form-input {
+  padding: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.log-button {
+  padding: 10px 20px;
+  background-color: #2196F3;
   color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.log-button:hover {
+  background-color: #1976D2;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.chart-container {
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.color-legend {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem 1rem;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .navbar a {
+    margin: 0 0.5rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .container {
+    padding: 1rem;
+    margin-top: 4rem;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
   }
 }

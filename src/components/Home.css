@@ -1,0 +1,48 @@
+/* src/components/Home.css */
+
+.home-container {
+    background-color: rgba(51, 51, 52, 0.8); /* Light background with 80% opacity */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+  
+  .home-title {
+    font-family: 'Arial', sans-serif; /* Using Arial for the main title */
+    font-size: 2.5rem;
+    color: #e91717;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .home-description {
+    font-family: 'Georgia', serif; /* Using Georgia for the description */
+    font-size: 1.2rem;
+    color: #f7f4f4;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-align: justify;
+  }
+  
+  .home-subtitle {
+    font-family: 'Verdana', sans-serif; /* Using Verdana for the subtitle */
+    font-size: 1.8rem;
+    color: #007BFF;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .home-list {
+    font-family: 'Tahoma', sans-serif; /* Using Tahoma for the list items */
+    font-size: 1.1rem;
+    color: #444;
+    padding-left: 20px;
+  }
+  
+  .home-list li {
+    margin-bottom: 10px;
+  }
+  

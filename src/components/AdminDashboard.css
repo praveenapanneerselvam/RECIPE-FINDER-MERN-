@@ -1,0 +1,60 @@
+.admin-dashboard {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+  }
+  
+  .admin-dashboard h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+  }
+  
+  .dashboard-content {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .dashboard-section {
+    flex: 1;
+    padding: 15px;
+    background-color: #d6cef5;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dashboard-section h2 {
+    font-size: 22px;
+    color: #020102;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+  }
+  
+  .dashboard-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .dashboard-section li {
+    padding: 10px 0;
+    border-bottom: 1px solid #d44747;
+  }
+  
+  .dashboard-section li p {
+    margin: 5px 0;
+    color: #333;
+  }
+  
+  .dashboard-section li p strong {
+    color: #555;
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-content {
+      flex-direction: column;
+    }
+  }
+  

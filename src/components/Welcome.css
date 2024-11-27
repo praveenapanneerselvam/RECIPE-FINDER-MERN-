@@ -1,0 +1,67 @@
+/* Welcome.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f0f4f8, #c2e9fb);
+  }
+  
+  .welcome-container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 2.5rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 100%;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .welcome-container h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  .welcome-container a {
+    display: inline-block;
+    margin: 0.75rem;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    background-color: #007bff;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .welcome-container a:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  .welcome-container a:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 8px rgba(0, 86, 179, 0.4);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

@@ -1,0 +1,66 @@
+.weekly-planner {
+  font-family: Arial, sans-serif;
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.weekly-planner h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.day-input {
+  margin-bottom: 10px;
+}
+
+.day-input label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.day-input select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.saved-menu {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 2px solid #ccc;
+}
+
+.saved-menu h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.saved-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.saved-menu li {
+  padding: 5px 0;
+}

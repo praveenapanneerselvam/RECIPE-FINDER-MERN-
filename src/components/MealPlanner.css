@@ -1,0 +1,55 @@
+/* MealPlanner.css */
+
+.meal-planner {
+    font-family: Arial, sans-serif; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    padding: 2rem; 
+    background-color: #f9f9f9; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center; /* Center the main heading */
+    margin-bottom: 1.5rem; /* Space below the heading */
+    color: #333; /* Dark text color */
+  }
+  
+  h4 {
+    margin-top: 1.5rem; /* Space above day headings */
+    color: #555; /* Slightly lighter color for day headings */
+  }
+  
+  button {
+    padding: 0.5rem 1rem; /* Padding for buttons */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  h3 {
+    margin-top: 2rem; /* Space above shopping list */
+    text-align: center; /* Center the shopping list heading */
+  }
+  
+  ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+  }
+  
+  li {
+    background-color: #fff; /* White background for list items */
+    margin: 0.5rem 0; /* Margin above and below items */
+    padding: 0.5rem; /* Padding for list items */
+    border-radius: 4px; /* Rounded corners for list items */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for items */
+  }
+  

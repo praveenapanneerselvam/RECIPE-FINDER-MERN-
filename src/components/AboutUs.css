@@ -1,0 +1,44 @@
+/* src/components/AboutUs.css */
+
+.about-container {
+    background-color: #e8f7f9; /* Light background for the About Us page */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 50px auto;
+  }
+  
+  .about-title {
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for the title */
+    font-size: 2.8rem;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .about-description {
+    font-family: 'Times New Roman', Times, serif; /* Serif font for description */
+    font-size: 1.3rem;
+    color: #34495e;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 30px;
+  }
+  
+  .about-subtitle {
+    font-family: 'Arial', sans-serif; /* Clean sans-serif font for subtitle */
+    font-size: 2rem;
+    color: #2980b9;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .about-text {
+    font-family: 'Georgia', serif; /* Elegant serif font for the main text */
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.7;
+    text-align: justify;
+  }
+  

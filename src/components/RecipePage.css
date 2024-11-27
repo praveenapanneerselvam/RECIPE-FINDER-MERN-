@@ -1,0 +1,425 @@
+/* Global Styles */
+body {
+  font-family: 'Roboto', sans-serif; /* Use a modern font */
+  background-color: #d6d1d1; /* Light background */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  color: #333; /* Dark text color */
+  scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: #4CAF50; /* Green background for navbar */
+  padding: 1rem; /* Padding for navbar */
+  position: sticky; /* Stick to the top */
+  top: 0; /* Stick to the top */
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+.navbar ul {
+  list-style: none; /* Remove bullet points */
+  display: flex; /* Flexbox for layout */
+  justify-content: center; /* Center the items */
+  padding: 0; /* Remove padding */
+}
+
+.navbar li {
+  margin: 0 1.5rem; /* Space between items */
+}
+
+.navbar a {
+  text-decoration: none; /* Remove underline */
+  color: white; /* White text */
+  font-weight: bold; /* Bold text */
+  transition: color 0.3s ease; /* Transition for hover effect */
+}
+
+.navbar a:hover {
+  color: #e0e0e0; /* Light color on hover */
+}
+
+/* App Container */
+.App {
+  width:100%; /* Set maximum width for the app */
+  margin: 0 auto; /* Center the app */
+  padding: 2rem; /* Add padding for space */
+  background-color: #eae1e1; /* White background for the app */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+   
+}
+
+/* Headings */
+h2 {
+  text-align: center; /* Center the title */
+  margin-bottom: 2rem; /* Space below title */
+  font-size: 2rem; /* Larger font size */
+  color: #4CAF50; /* Green color for headings */
+}
+
+/* Buttons */
+button {
+  background-color: #4CAF50; /* Green background for buttons */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  padding: 0.75rem 1.5rem; /* Padding for button */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer on hover */
+  font-size: 1rem; /* Font size */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transition for hover effect */
+  margin-top: 1rem; /* Space above buttons */
+}
+
+button:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Search Form */
+.search-form {
+  display: flex; /* Flexbox for layout */
+  justify-content: center; /* Center content */
+  margin-bottom: 1.5rem; /* Space below search form */
+}
+
+.search-bar {
+  padding: 0.75rem; /* Padding for input */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1rem; /* Font size */
+  width: 300px; /* Fixed width for input */
+  margin-right: 0.5rem; /* Space between input and button */
+  transition: border-color 0.3s; /* Transition for focus effect */
+}
+
+.search-bar:focus {
+  outline: none; /* Remove outline on focus */
+  border-color: #4CAF50; /* Border color on focus */
+}
+
+/* Flexbox layout for filter options */
+.filter-container {
+  display: flex; /* Use flexbox for layout */
+  flex-wrap: wrap; /* Allow wrapping to next line */
+  justify-content: space-between; /* Space out items */
+  margin-bottom: 1.5rem; /* Margin below the filter section */
+}
+
+.filter-group {
+  display: flex; /* Flexbox for label and select */
+  align-items: center; /* Center align items */
+  margin-right: 1rem; /* Space between groups */
+}
+
+.filter-group label {
+  margin-right: 0.5rem; /* Space between label and select */
+  font-weight: bold; /* Make label bold */
+}
+
+/* Recipe Card Styles */
+.recipes {
+  display: grid; /* Grid layout for recipes */
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); /* Responsive grid */
+  gap: 4rem; /* Gap between grid items */
+}
+
+.recipe-card {
+  background-color: #ebe8e8; /* White background for recipe cards */
+  border-radius: 10px; /* Rounded corners for cards */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for cards */
+  padding: 1rem; /* Padding inside cards */
+  transition: transform 0.2s, box-shadow 0.2s; /* Transition for hover effect */
+}
+
+.recipe-card:hover {
+  transform: scale(1.05); /* Scale up on hover */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+/* Recipe Image */
+.recipe-card img {
+  width: 100%; /* Full width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Rounded corners */
+}
+
+/* Recipe Title */
+.recipe-card h3 {
+  font-size: 1.5rem; /* Title font size */
+  margin: 0.5rem 0; /* Margin above and below */
+}
+
+/* Recipe Details */
+.recipe-card p {
+  font-size: 1rem; /* Description font size */
+  color: #666; /* Light gray text */
+}
+
+/* Loading and Error Messages */
+.loading, .error {
+  text-align: center; /* Center the text */
+  font-size: 1.2rem; /* Larger font size */
+  color: #ff5722; /* Error color */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .filter-container {
+    flex-direction: column; /* Stack filters vertically */
+  }
+
+  .filter-group {
+    margin-bottom: 1rem; /* Space below each filter group */
+  }
+
+  .search-form {
+    flex-direction: column; /* Stack search form elements vertically */
+  }
+
+  .search-bar {
+    width: 100%; /* Full width for input */
+    margin-bottom: 0.5rem; /* Space below input */
+  }
+}
+/* Search Form */
+.search-form {
+  display: flex; /* Flexbox for layout */
+  justify-content: center; /* Center content */
+  margin-bottom: 1.5rem; /* Space below search form */
+  border: 2px solid #4CAF50; /* Border for the entire form */
+  border-radius: 5px; /* Rounded corners */
+  padding: 0.5rem; /* Padding for the form */
+  background-color: #efe6e6; /* White background for search form */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Search Bar */
+.search-bar {
+  padding: 0.75rem; /* Padding for input */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1rem; /* Font size */
+  width: 300px; /* Fixed width for input */
+  margin-right: 0.5rem; /* Space between input and button */
+  transition: box-shadow 0.3s; /* Transition for focus effect */
+  outline: none; /* Remove outline */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.search-bar:focus {
+  box-shadow: 0 0 5px #4CAF50; /* Glow effect on focus */
+}
+
+/* Search Button */
+.search-button {
+  background-color: #4CAF50; /* Green background for button */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  padding: 0.75rem 1.5rem; /* Padding for button */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer on hover */
+  font-size: 1rem; /* Font size */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transition for hover effect */
+}
+
+.search-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Dropdown Styles */
+.filter-group select {
+  padding: 0.75rem; /* Padding for dropdown */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1rem; /* Font size */
+  margin-left: 0.5rem; /* Space between label and select */
+  transition: border-color 0.3s; /* Transition for focus effect */
+  background-color: #dccfcf; /* White background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.filter-group select:focus {
+  outline: none; /* Remove outline on focus */
+  border-color: #4CAF50; /* Border color on focus */
+  box-shadow: 0 0 5px #4CAF50; /* Glow effect on focus */
+}
+
+/* Change the dropdown arrow */
+.filter-group select {
+  appearance: none; /* Remove default arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="green"><polygon points="0,0 16,0 8,8" /></svg>'); /* Custom arrow */
+  background-repeat: no-repeat; /* No repeat */
+  background-position: right 10px center; /* Position the arrow */
+  background-size: 12px; /* Size of the arrow */
+}
+/* Search Form */
+.search-form {
+  display: flex; /* Flexbox for layout */
+  justify-content: space-between; /* Space between left and right */
+  align-items: center; /* Center items vertically */
+  margin-bottom: 1.5rem; /* Space below search form */
+  border: 2px solid #4CAF50; /* Border for the entire form */
+  border-radius: 5px; /* Rounded corners */
+  padding: 0.5rem; /* Padding for the form */
+  background-color: #ffffff; /* White background for search form */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Search Bar */
+.search-bar {
+  padding: 0.75rem; /* Padding for input */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1rem; /* Font size */
+  width: 70%; /* Adjusted width for input */
+  margin-right: 0.5rem; /* Space between input and button */
+  transition: box-shadow 0.3s; /* Transition for focus effect */
+  outline: none; /* Remove outline */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.search-bar:focus {
+  box-shadow: 0 0 5px #4CAF50; /* Glow effect on focus */
+}
+
+/* Search Button */
+.search-button {
+  background-color: #4CAF50; /* Green background for button */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  padding: 0.75rem 1.5rem; /* Padding for button */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer on hover */
+  font-size: 1rem; /* Font size */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transition for hover effect */
+}
+
+.search-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Dropdown Styles */
+.filter-group {
+  display: flex; /* Flexbox for layout */
+  align-items: center; /* Center items vertically */
+}
+
+.filter-group select {
+  padding: 0.75rem; /* Padding for dropdown */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1rem; /* Font size */
+  margin-left: 0.5rem; /* Space between label and select */
+  transition: border-color 0.3s; /* Transition for focus effect */
+  background-color: #fff; /* White background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.filter-group select:focus {
+  outline: none; /* Remove outline on focus */
+  border-color: #4CAF50; /* Border color on focus */
+  box-shadow: 0 0 5px #4CAF50; /* Glow effect on focus */
+}
+
+/* Change the dropdown arrow */
+.filter-group select {
+  appearance: none; /* Remove default arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="green"><polygon points="0,0 16,0 8,8" /></svg>'); /* Custom arrow */
+  background-repeat: no-repeat; /* No repeat */
+  background-position: right 10px center; /* Position the arrow */
+  background-size: 12px; /* Size of the arrow */
+}
+/* Dropdown Styles */
+.filter-group {
+  display: flex; /* Flexbox for layout */
+  align-items: center; /* Center items vertically */
+}
+
+.filter-group label {
+  font-size: 1rem; /* Font size for label */
+  margin-right: 0.5rem; /* Space between label and dropdown */
+}
+
+.filter-group select {
+  padding: 0.75rem; /* Padding for dropdown */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1rem; /* Font size */
+  margin-left: 0.5rem; /* Space between label and select */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Transition for focus effect */
+  background-color: #fff; /* White background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  outline: none; /* Remove outline */
+}
+
+/* Highlight effect on focus */
+.filter-group select:focus {
+  border-color: #4CAF50; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Glow effect */
+}
+
+/* Highlight effect on hover */
+.filter-group select:hover {
+  border-color: #45a049; /* Darker green on hover */
+  background-color: #f9f9f9; /* Light grey background on hover */
+}
+
+/* Change the dropdown arrow */
+.filter-group select {
+  appearance: none; /* Remove default arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="green"><polygon points="0,0 16,0 8,8" /></svg>'); /* Custom arrow */
+  background-repeat: no-repeat; /* No repeat */
+  background-position: right 10px center; /* Position the arrow */
+  background-size: 12px; /* Size of the arrow */
+}
+/* Dropdown Styles */
+.filter-group select {
+  padding: 0.75rem; /* Padding for dropdown */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1rem; /* Font size */
+  margin-left: 0.5rem; /* Space between label and select */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Transition for focus and hover effects */
+  background-color: #fff; /* White background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Hover effect for dropdown */
+.filter-group select:hover {
+  border-color: #66bb6a; /* Change border color on hover */
+  box-shadow: 0 0 5px #66bb6a; /* Glow effect on hover */
+}
+
+/* Focus effect for dropdown */
+.filter-group select:focus {
+  outline: none; /* Remove outline on focus */
+  border-color: #4CAF50; /* Border color on focus */
+  box-shadow: 0 0 8px #4CAF50; /* Stronger glow effect on focus */
+}
+
+/* Change the dropdown arrow */
+.filter-group select {
+  appearance: none; /* Remove default arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="%234CAF50"><polygon points="0,0 16,0 8,8" /></svg>'); /* Custom arrow with a distinct color */
+  background-repeat: no-repeat; /* No repeat */
+  background-position: right 10px center; /* Position the arrow */
+  background-size: 12px; /* Size of the arrow */
+}/* Flexbox layout for filter options */
+.filter-container {
+  display: flex; /* Use flexbox for layout */
+  flex-wrap: wrap; /* Allow wrapping to next line */
+  justify-content: space-between; /* Space out items */
+  margin-bottom: 1.5rem; /* Margin below the filter section */
+  background-color: #76b97c; /* Light green background to highlight */
+  border: 1px solid #4CAF50; /* Green border for the container */
+  padding: 1rem; /* Add padding inside the container */
+  border-radius: 5px; /* Rounded corners */
+}
+
+
+
+
+
