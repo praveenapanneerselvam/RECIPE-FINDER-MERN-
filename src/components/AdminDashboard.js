@@ -1,24 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './AdminDashboard.css';
 import RecipeForm from './RecipeForm'; 
-const AdminDashboard = () => {
-  const [users, setUsers] = useState([]);
-  const [contacts, setContacts] = useState([]);
-  const [error, setError] = useState('');
-  const [recipes, setRecipes] = useState([]); 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/users');
-        if (!response.ok) throw new Error('Failed to fetch users');
-        const data = await response.json();
-        setUsers(data);
-      } catch (err) {
-        setError('Could not load user signup details.');
-        console.error(err);
-      }
-    };
 
+const AdminDashboard = () => {
+  const [contacts, setContacts] = useState([]);
+  const [recipes, setRecipes] = useState([]); 
+
+  useEffect(() => {
     const fetchContacts = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/contacts');
@@ -26,7 +14,6 @@ const AdminDashboard = () => {
         const data = await response.json();
         setContacts(data);
       } catch (err) {
-        setError('Could not load contact details.');
         console.error(err);
       }
     };
@@ -38,12 +25,10 @@ const AdminDashboard = () => {
         const data = await response.json();
         setRecipes(data);
       } catch (err) {
-        setError('Could not load recipe details.');
         console.error(err);
       }
     };
 
-    fetchUsers();
     fetchContacts();
     fetchRecipes();
   }, []);
@@ -53,8 +38,6 @@ const AdminDashboard = () => {
       <h1>Admin Dashboard</h1>
       
       <div className="dashboard-content">
-      
-
         <section className="dashboard-section">
           <h2>Contact Messages</h2>
           {contacts.length ? (
@@ -93,10 +76,9 @@ const AdminDashboard = () => {
         </section>
       </div>
       <div className="dashboard-section">
-          <h2>Add a New Recipe</h2>
-          <RecipeForm />
-        </div>
-      
+        <h2>Add a New Recipe</h2>
+        <RecipeForm />
+      </div>
     </div>
   );
 };

@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_USER = 'your-dockerhub-username'
+        BACKEND_IMAGE = "${DOCKERHUB_USER}/recipe-backend:latest"
+        FRONTEND_IMAGE = "${DOCKERHUB_USER}/recipe-frontend:latest"
+    }
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/praveenapanneerselvam/RECIPE-FINDER-MERN-.git'
+            }
+        }
+        stage('Build Backend Image') {
+            steps {
+                dir('backend') {
+                    script {
+                        docker.build(env.BACKEND_IMAGE)
+                    }
+                }
+            }
+        }
+        stage('Build Frontend Image') {
+            steps {
+                script {
+                    docker.build(env.FRONTEND_IMAGE, '.')
+                }
+            }
+        }
+        stage('Push Images') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                    script {
+                        docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+                            docker.image(env.BACKEND_IMAGE).push()
+                            docker.image(env.FRONTEND_IMAGE).push()
+                        }
+                    }
+                }
+            }
+        }
+        stage('Deploy to Minikube') {
+            steps {
+                script {
+                    sh 'kubectl apply -f Deployment/backend-deployment.yaml'
+                    sh 'kubectl apply -f Deployment/frontend-deployment.yaml'
+                }
+            }
+        }
+    }
+}

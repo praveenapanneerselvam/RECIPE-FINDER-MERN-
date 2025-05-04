@@ -1,11 +1,10 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { FavoritesProvider } from './components/FavoritesContext';
 import Navbar from './components/Navbar';
 import PublicNavbar from './components/PublicNavbar';
-import Welcome from './components/Welcome';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import RecipePage from './components/RecipePage';
@@ -21,7 +20,6 @@ import Contact from './components/Contact';
 import AdminLogin from './components/AdminLogin';
 import './App.css';
 import AdminDashboard from './components/AdminDashboard';
-import { getUserDataFromLocalStorage } from './utils/localStorageUtils';
 import UserDashboard from './components/UserDashboard';
 
 const App = () => {

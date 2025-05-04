@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 
 const MealPlanner = () => {
-  const [meals, setMeals] = useState({});
+  const [meals] = useState({});
 
   const handleAddRecipe = () => {
     

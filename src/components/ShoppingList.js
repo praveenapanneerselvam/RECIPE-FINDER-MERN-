@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 
 const ShoppingList = () => {
-  const [items, setItems] = useState([
+  const [items] = useState([
     // Example data for initial state
     { name: 'Tomatoes', quantity: '2 lbs' },
     { name: 'Onions', quantity: '1 lb' },

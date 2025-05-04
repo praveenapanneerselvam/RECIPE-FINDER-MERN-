@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './RecipeForm.css';
 
@@ -12,19 +12,13 @@ const RecipeForm = ({ userId }) => {
   const [prepTime, setPrepTime] = useState('');
   const [submittedRecipe, setSubmittedRecipe] = useState(null);
   const [errors, setErrors] = useState({});
-  const [recipes, setRecipes] = useState([]);
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/recipes');
-        setRecipes(response.data.recipes); // Assuming the backend returns an array of recipes
-      } catch (error) {
-        console.error('Error fetching recipes:', error);
-      }
-    };
 
-    fetchRecipes();
+  useEffect(() => {
+    // You can remove this effect if you don't use recipes anywhere
+    // If you want to keep fetching recipes for another purpose, keep it
+    // Otherwise, remove the recipes state and this effect
   }, []);
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -54,11 +48,9 @@ const RecipeForm = ({ userId }) => {
     };
 
     try {
-      // Make POST request to the backend
       const response = await axios.post('http://localhost:5000/api/recipes', newRecipe);
-      setSubmittedRecipe(response.data.recipe); // Update state with the submitted recipe
+      setSubmittedRecipe(response.data.recipe);
 
-      // Clear the input fields after successful submission
       setRecipeName('');
       setIngredients('');
       setInstructions('');

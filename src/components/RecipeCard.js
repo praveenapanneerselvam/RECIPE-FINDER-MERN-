@@ -51,24 +51,11 @@ const RecipeCard = ({
   };
 
   const toggleDetails = () => setShowDetails(!showDetails);
-  
-  // Extract YouTube ID from URL
-  function getYouTubeId(url) {
-    if (!url || typeof url !== 'string') {
-      return null; // Return null or a default value if url is undefined or not a string
-    }
-    
-    const match = url.match(/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-    return match ? match[1] : null;
-  }
-  
-
-  const youtubeId = getYouTubeId(url || shareAs);
 
   return (
     <div className="recipe-card">
       <h2>{title}</h2>
-      <img src={image} alt={`Image of ${title}`} />
+      <img src={image} alt={title} />
 
       <button onClick={toggleDetails} className="view-details-button">
         {showDetails ? 'Hide Details' : 'View Details'}
@@ -140,8 +127,6 @@ const RecipeCard = ({
 
           {tags.length > 0 && <p><strong>Tags:</strong> {tags.join(', ')}</p>}
           {externalId && <p><strong>External ID:</strong> {externalId}</p>}
-
-         
         </div>
       )}
       {youtubeUrl && (

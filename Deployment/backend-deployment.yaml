@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recipe-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recipe-backend
+  template:
+    metadata:
+      labels:
+        app: recipe-backend
+    spec:
+      containers:
+        - name: backend
+          image: praveena19/recipe-backend:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MONGO_URI
+              value: "mongodb+srv://praveena:praveena19@paytrack.y4owi.mongodb.net/?retryWrites=true&w=majority&appName=paytrack"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: recipe-backend
+spec:
+  selector:
+    app: recipe-backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP

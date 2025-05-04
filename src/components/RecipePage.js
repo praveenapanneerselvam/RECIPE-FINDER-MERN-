@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Recipe from './RecipeCard';
-import SignUp from './SignUp'; 
 import './RecipePage.css';
 
 const App = () => {
@@ -14,14 +13,13 @@ const App = () => {
   const [query, setQuery] = useState("vegetarian");
   const [loading, setLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showSignUp, setShowSignUp] = useState(false); 
 
-  const [userDetails, setUserDetails] = useState({ name: '', email: '' });
   const [selectedCuisine, setSelectedCuisine] = useState("");
   const [selectedHealth, setSelectedHealth] = useState("");
   const [selectedMealType, setSelectedMealType] = useState("");
   const [selectedDishType, setSelectedDishType] = useState("");
   const [error, setError] = useState(null); 
+
   const getYouTubeVideos = async (query) => {
     try {
       const response = await fetch(
@@ -35,7 +33,6 @@ const App = () => {
       const data = await response.json();
       console.log("YouTube API response data:", data);
   
-     
       const videoItems = data.items.filter((item) => item.id.videoId);
       if (videoItems.length > 0) {
         setVideos(videoItems);
@@ -57,6 +54,37 @@ const App = () => {
     }
   }, []);
 
+  const getRecipes = useCallback(async () => {
+    try {
+      const filters = [];
+      if (selectedCuisine) filters.push(`cuisineType=${selectedCuisine}`);
+      if (selectedMealType) filters.push(`mealType=${selectedMealType}`);
+      if (selectedDishType) filters.push(`dishType=${selectedDishType}`);
+
+      const response = await fetch(
+        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${APP_ID}&app_key=${APP_KEY}&q=${query}&${filters.join('&')}`
+      );
+
+      if (!response.ok) throw new Error('Failed to fetch recipes');
+
+      const data = await response.json();
+      const recipesWithVideos = await Promise.all(data.hits.map(async (recipe) => {
+        const video = await getYouTubeVideosForRecipe(recipe.recipe.label);
+        return {
+          ...recipe,
+          youtubeUrl: video ? video.id.videoId : '',
+        };
+      }));
+
+      setRecipes(recipesWithVideos);
+      console.log("Fetched recipes:", data.hits);
+
+    } catch (error) {
+      console.error('Error fetching recipes:', error);
+      setError('Could not fetch recipes. Please try again later.');
+    }
+  }, [selectedCuisine, selectedMealType, selectedDishType, APP_ID, APP_KEY, query]);
+
   useEffect(() => {
     if (isLoggedIn) {
       const fetchData = async () => {
@@ -69,49 +97,7 @@ const App = () => {
       };
       fetchData();
     }
-  }, [query, isLoggedIn, selectedCuisine, selectedHealth, selectedMealType, selectedDishType]);
-
-  const getRecipes = async () => {
-    try {
-      const filters = [];
-  
-      if (selectedCuisine) {
-        filters.push(`cuisineType=${selectedCuisine}`);
-      }
-     
-      if (selectedMealType) {
-        filters.push(`mealType=${selectedMealType}`);
-      }
-      if (selectedDishType) {
-        filters.push(`dishType=${selectedDishType}`);
-      }
-  
-      const response = await fetch(
-        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${APP_ID}&app_key=${APP_KEY}&q=${query}&${filters.join('&')}`
-      );
-  
-      if (!response.ok) {
-        throw new Error('Failed to fetch recipes');
-      }
-  
-      const data = await response.json();
-      const recipesWithVideos = await Promise.all(data.hits.map(async (recipe) => {
-        const video = await getYouTubeVideosForRecipe(recipe.recipe.label);
-        return {
-          ...recipe,
-          youtubeUrl: video ? video.id.videoId : '',
-        };
-      }));
-  
-      setRecipes(recipesWithVideos); // Set recipes with YouTube video
-      console.log("Fetched recipes:", data.hits);
-  
-    } catch (error) {
-      console.error('Error fetching recipes:', error);
-      setError('Could not fetch recipes. Please try again later.');
-    }
-  };
-  
+  }, [query, isLoggedIn, selectedCuisine, selectedHealth, selectedMealType, selectedDishType, getRecipes]);
 
   const getYouTubeVideosForRecipe = async (recipeTitle) => {
     try {
@@ -134,18 +120,10 @@ const App = () => {
     }
   };
   
-  
-
   const getSearch = (e) => {
     e.preventDefault();
     setQuery(search);
     setSearch("");
-  };
-
-  const handleSignUpSuccess = (userData) => {
-    localStorage.setItem('userData', JSON.stringify(userData));
-    setIsLoggedIn(true);
-    setShowSignUp(false); // Hide sign-up form after successful sign-up
   };
 
   const handleLogin = () => {
@@ -153,11 +131,10 @@ const App = () => {
     setIsLoggedIn(true);
   };
   
-
   return (
     <div className="App">
       {!isLoggedIn ? (
-        <div className="recipe-container"e>
+        <div className="recipe-container">
           <h2>PERSONALISED MENU MADE FOR YOU</h2>
           <button onClick={handleLogin}>RECIPES FOR YOU</button>
         </div>
@@ -255,7 +232,7 @@ const App = () => {
                   url={recipe.recipe.url}
                   shareAs={recipe.recipe.shareAs}
                   youtubeUrl={recipe.youtubeUrl}
-                    yieldAmount={recipe.recipe.yield}
+                  yieldAmount={recipe.recipe.yield}
                   dietLabels={recipe.recipe.dietLabels}
                   cautions={recipe.recipe.cautions}
                   glycemicIndex={recipe.recipe.glycemicIndex}
