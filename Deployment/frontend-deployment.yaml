@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: REPLACE_BACKEND_IMAGE
+          image: REPLACE_FRONTEND_IMAGE
           imagePullPolicy: Always
           ports:
             - containerPort: 80
