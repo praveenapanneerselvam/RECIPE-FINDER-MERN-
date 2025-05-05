@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: praveena19/recipe-backend:latest
+          image: REPLACE_BACKEND_IMAGE
           ports:
             - containerPort: 5000
           env:
