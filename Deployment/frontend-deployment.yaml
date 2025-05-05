@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: praveena19/recipe-frontend:latest
+          image: REPLACE_BACKEND_IMAGE
           ports:
             - containerPort: 80
 ---
