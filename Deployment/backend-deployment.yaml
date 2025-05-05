@@ -15,6 +15,7 @@ spec:
       containers:
         - name: backend
           image: REPLACE_BACKEND_IMAGE
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:

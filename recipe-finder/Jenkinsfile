@@ -2,9 +2,12 @@ pipeline {
     agent any
 
     environment {
+        KUBECONFIG = '/home/praveena/jenkins-kube/config'
         DOCKERHUB_USER = 'praveena19'
-        BACKEND_IMAGE = "${DOCKERHUB_USER}/recipe-backend:latest"
-        FRONTEND_IMAGE = "${DOCKERHUB_USER}/recipe-frontend:latest"
+        BUILD_TAG = "${env.BUILD_NUMBER}"
+        BACKEND_IMAGE = "${DOCKERHUB_USER}/recipe-backend:${BUILD_TAG}"
+        FRONTEND_IMAGE = "${DOCKERHUB_USER}/recipe-frontend:${BUILD_TAG}"
+        REACT_APP_API_URL = "http://recipe-backend:5000"
     }
 
     stages {
@@ -13,6 +16,7 @@ pipeline {
                 git 'https://github.com/praveenapanneerselvam/RECIPE-FINDER-MERN-.git'
             }
         }
+
         stage('Build Backend Image') {
             steps {
                 dir('backend') {
@@ -22,33 +26,56 @@ pipeline {
                 }
             }
         }
+
         stage('Build Frontend Image') {
             steps {
-                script {
-                    docker.build(env.FRONTEND_IMAGE, '.')
-                }
-            }
-        }
-        stage('Push Images') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                dir('recipe-finder') {
                     script {
-                        docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-                            docker.image(env.BACKEND_IMAGE).push()
-                            docker.image(env.FRONTEND_IMAGE).push()
-                        }
+                        docker.build(env.FRONTEND_IMAGE, "--no-cache --build-arg REACT_APP_API_URL=${env.REACT_APP_API_URL} .")
                     }
                 }
             }
         }
-        stage('Deploy to Minikube') {
+
+        stage('Push Images to DockerHub') {
             steps {
-                script {
-                    sh 'kubectl apply -f Deployment/backend-deployment.yaml'
-                    sh 'kubectl apply -f Deployment/frontend-deployment.yaml'
+                withDockerRegistry([credentialsId: 'docker-hub-creds', url: '']) {
+                    script {
+                        docker.image(env.BACKEND_IMAGE).push()
+                        docker.image(env.FRONTEND_IMAGE).push()
+                    }
                 }
             }
         }
+
+        stage('Deploy to Minikube') {
+            steps {
+                script {
+                    // Replace backend image in YAML and save as temp
+                    def backendYaml = sh(
+                        script: "sed 's|REPLACE_BACKEND_IMAGE|${env.BACKEND_IMAGE}|g' Deployment/backend-deployment.yaml",
+                        returnStdout: true
+                    ).trim()
+                    writeFile file: 'backend-temp.yaml', text: backendYaml
+
+                    // Replace frontend image in YAML and save as temp
+                    def frontendYaml = sh(
+                        script: "sed 's|REPLACE_FRONTEND_IMAGE|${env.FRONTEND_IMAGE}|g' Deployment/frontend-deployment.yaml",
+                        returnStdout: true
+                    ).trim()
+                    writeFile file: 'frontend-temp.yaml', text: frontendYaml
+
+                    // Apply updated manifests
+                    sh 'kubectl apply -f backend-temp.yaml'
+                    sh 'kubectl apply -f frontend-temp.yaml'
+
+                    // Force redeploy so the updated image gets used
+                    sh 'kubectl rollout restart deployment/recipe-backend'
+                    sh 'kubectl rollout restart deployment/recipe-frontend'
+                }
+            }
+        }
+
         stage('Deploy Monitoring') {
             steps {
                 script {
