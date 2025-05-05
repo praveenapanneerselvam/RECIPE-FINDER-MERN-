@@ -28,7 +28,7 @@ const SignUp = () => {
     setErrorMessage(''); // Clear any previous error message
 
     try {
-      await axios.post('http://localhost:5000/api/signup', formData);
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/signup`, formData);
       alert('Sign up successful');
       // Redirect to login or recipes page after successful signup
     } catch (error) {
