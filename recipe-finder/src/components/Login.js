@@ -15,7 +15,7 @@ const Login = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/login', { email, password });
+      const response = await axios.post('http://recipe-backend:5000/api/login', { email, password });
       dispatch(setUser(response.data.user));
       localStorage.setItem('token', response.data.token); // Store token in local storage
       localStorage.setItem('userData', JSON.stringify(response.data.user)); 
