@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_USER = 'your-dockerhub-username'
+        DOCKERHUB_USER = 'praveena19'
         BACKEND_IMAGE = "${DOCKERHUB_USER}/recipe-backend:latest"
         FRONTEND_IMAGE = "${DOCKERHUB_USER}/recipe-frontend:latest"
     }
@@ -46,6 +46,14 @@ pipeline {
                 script {
                     sh 'kubectl apply -f Deployment/backend-deployment.yaml'
                     sh 'kubectl apply -f Deployment/frontend-deployment.yaml'
+                }
+            }
+        }
+        stage('Deploy Monitoring') {
+            steps {
+                script {
+                    sh 'kubectl apply -f Deployment/prometheus-deployment.yaml'
+                    sh 'kubectl apply -f Deployment/grafana-deployment.yaml'
                 }
             }
         }
