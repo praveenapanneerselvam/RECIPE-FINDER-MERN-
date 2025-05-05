@@ -7,10 +7,14 @@ pipeline {
         BUILD_TAG = "${env.BUILD_NUMBER}"
         BACKEND_IMAGE = "${DOCKERHUB_USER}/recipe-backend:${BUILD_TAG}"
         FRONTEND_IMAGE = "${DOCKERHUB_USER}/recipe-frontend:${BUILD_TAG}"
-        REACT_APP_API_URL = "http://recipe-backend:5000"
     }
 
     stages {
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
         stage('Clone Repo') {
             steps {
                 git 'https://github.com/praveenapanneerselvam/RECIPE-FINDER-MERN-.git'
@@ -31,7 +35,7 @@ pipeline {
             steps {
                 dir('recipe-finder') {
                     script {
-                        docker.build(env.FRONTEND_IMAGE, "--no-cache --build-arg REACT_APP_API_URL=${env.REACT_APP_API_URL} .")
+                        docker.build(env.FRONTEND_IMAGE)
                     }
                 }
             }
@@ -51,25 +55,13 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-                    // Replace backend image in YAML and save as temp
-                    def backendYaml = sh(
-                        script: "sed 's|REPLACE_BACKEND_IMAGE|${env.BACKEND_IMAGE}|g' Deployment/backend-deployment.yaml",
-                        returnStdout: true
-                    ).trim()
-                    writeFile file: 'backend-temp.yaml', text: backendYaml
+                    sh """
+                        sed 's/\\\${BUILD_NUMBER}/${env.BUILD_NUMBER}/g' Deployment/backend-deployment.yaml > backend-deployment-tagged.yaml
+                        sed 's/\\\${BUILD_NUMBER}/${env.BUILD_NUMBER}/g' Deployment/frontend-deployment.yaml > frontend-deployment-tagged.yaml
+                        kubectl apply -f backend-deployment-tagged.yaml
+                        kubectl apply -f frontend-deployment-tagged.yaml
+                    """
 
-                    // Replace frontend image in YAML and save as temp
-                    def frontendYaml = sh(
-                        script: "sed 's|REPLACE_FRONTEND_IMAGE|${env.FRONTEND_IMAGE}|g' Deployment/frontend-deployment.yaml",
-                        returnStdout: true
-                    ).trim()
-                    writeFile file: 'frontend-temp.yaml', text: frontendYaml
-
-                    // Apply updated manifests
-                    sh 'kubectl apply -f backend-temp.yaml'
-                    sh 'kubectl apply -f frontend-temp.yaml'
-
-                    // Force redeploy so the updated image gets used
                     sh 'kubectl rollout restart deployment/recipe-backend'
                     sh 'kubectl rollout restart deployment/recipe-frontend'
                 }

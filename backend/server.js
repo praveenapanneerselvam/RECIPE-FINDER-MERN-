@@ -9,7 +9,7 @@ const recipeRoutes = require('./routes/recipes');
 const contactRoutes = require('./routes/contact');  
 const menuRoutes = require('./routes/menuRoutes');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 
 app.use(cors());

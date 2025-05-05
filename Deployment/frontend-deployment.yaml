@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: REPLACE_BACKEND_IMAGE
+          image: praveena19/recipe-frontend:${BUILD_NUMBER}   # <-- Use Jenkins build number
           imagePullPolicy: Always
           ports:
             - containerPort: 80
